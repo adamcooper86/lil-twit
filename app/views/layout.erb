@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html lang="en" class="no-js">
 <head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/foundation/css/normalize.css">
+  <link rel="stylesheet" href="/foundation/css/foundation.css">
   <link rel="stylesheet" href="/css/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css"></script>
+  <script src="/foundation/js/vendor/modernizr.js"></script>
   <script src="/js/application.js"></script>
-
   <title>Lil-Twit</title>
 </head>
 <header>
@@ -23,14 +19,25 @@
   </div>
 </header>
 <body>
-  <span id="logo"><img src="../public/img/logo.svg" /></span>
-  <h2>Lil-Twit</h2>
-  <div class="tweet_content">
-    <p>Here are the latest tweets!</p>
-    <%= yield %>
+  <div class="row">
+    <div class="small-1 medium-1 large-1 columns"></div>
+    <div class="small-11 medium-11 large-11 columns">
+      <h2>Lil-Twit <small>The significantly worse way to waste your time</small></h2>
+        <%= yield %>
+    </div>
   </div>
+  <div class="row">
+    <div class="small-1 medium-1 large-1 columns"></div>
+    <div class="small-11 medium-11 large-11 columns">
+      <footer>
+        <p>Copyright Lil-Twit 2015</p>
+      </footer>
+    </div>
+  </div>
+  <script src="/foundation/js/vendor/jquery.js"></script>
+  <script src="/foundation/js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
-<footer>
-  <p>Copyright Lil-Twit 2015</p>
-</footer>
 </html>
