@@ -1,3 +1,8 @@
+get '/users/new' do
+  p "hello"
+  erb :'users/new'
+end
+
 get '/users/:id' do
   @user = User.find(params[:id])
   if @user == current_user
@@ -18,10 +23,6 @@ post '/users' do
               state: params[:state]
               )
   redirect "/users/#{@user.id}/timeline"
-end
-
-get '/users/new' do
-  erb :'users/new'
 end
 
 # read
