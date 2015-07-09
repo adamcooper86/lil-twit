@@ -7,16 +7,18 @@ describe 'User controller' do
       get "/users/#{user.id}"
       expect(last_response.status).to eq(200)
     end
-    it 'should display user\'s private page if user is logged in' do
+
+    it 'should display user\'s private page' do
       user = User.find(1)
-      p user
-      get 'users/10'
-      expect(last_response.body).to include("#{user.username}")
+      get 'users/1'
+      expect(last_response.body).to include("<h2>Private</h2>")
     end
-    it 'should display user\'s public page if user is not logged in' do
+
+    it 'should display user\'s public page' do
+      second_user = User.create(username: 'fucker', password: '9873', email: 'bullshit@bullshit.net')
       user = User.find(1)
-      get '/users/2'
-      expect(last_response.body).to include("Hello World")
+      get "/users/#{second_user.id}"
+      expect(last_response.body).to include("<h2>Public</h2>")
     end
   end
 end

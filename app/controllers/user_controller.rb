@@ -1,9 +1,9 @@
 get '/users/:id' do
-  # only rendering partials
-  if current_user.id == params[:id]
-    erb :_user_private
+  @user = User.find(params[:id])
+  if @user == current_user
+    erb :'users/user_private'
   else
-    erb :_user_public
+    erb :'users/user_public'
   end
 end
 
@@ -17,8 +17,9 @@ post '/users' do
               city: params[:city],
               state: params[:state]
               )
-  redirect "/users/#{@user.id}"
+  redirect "/users/#{@user.id}/timeline"
 end
+
 get '/users/new' do
   erb :'users/new'
 end
@@ -26,7 +27,7 @@ end
 # read
 get '/users' do
   @users = User.all
-  erb :all_users
+  erb :'users/all_users'
 end
 
 #update
@@ -50,6 +51,23 @@ delete '/users/:id' do
   User.destroy(@user.id)
   redirect '/'
 end
+
+# TIMELINE
+
+get '/users/:id/timeline' do
+  @user = User.find(params[:id])
+  unless @user == current_user
+    erb :user_error
+  else
+    erb :user_timeline
+  end
+end
+
+
+
+
+
+
 
 
 
