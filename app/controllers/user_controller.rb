@@ -16,6 +16,7 @@ post '/users' do
               city: params[:city],
               state: params[:state]
               )
+  login @user
   redirect "/users/#{@user.id}"
 end
 get '/users/new' do
