@@ -7,7 +7,8 @@ get '/sessions/delete' do
 end
 
 post '/sessions' do
-  if log_in
+  if @user = valid_log_in
+    log_in @user
     redirect to "/user/#{@user.id}/timeline"
   else
     redirect to '/sessions/new'
