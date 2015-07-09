@@ -4,10 +4,10 @@ get '/tweets' do
 end
 
 get '/tweets/new' do
-  erb :new
+  erb :'tweets/new'
 end
 
-post ':user_id/tweets' do
+post '/tweets' do
   @tweet = Tweet.create(content: params[:content])
   # connect to user id?
   if @tweet.persisted?
@@ -18,25 +18,25 @@ post ':user_id/tweets' do
   end
 end
 
-get ':user_id/tweets/:id' do
+get 'tweets/:id' do
   @tweet = Tweet.where(id: params[:id]).first
-  redirect '/:user_id/tweets/#{params[:id]}'
+  redirect '/tweets/#{params[:id]}'
 end
 
-get ':user_id/tweets/:id/edit' do
+get 'tweets/:id/edit' do
     @tweet = Tweet.where(id: params[:id]).first
     erb :edit
 end
 
-put ':user_id/tweets/:id' do
+put '/tweets/:id' do
   @tweet = Tweet.find(params[:id])
   @tweet.update_attributes(content: params[:updated_content])
   @tweet.save
-  redirect ':user_id/tweets'
+  redirect '/tweets'
 end
 
-delete ':user_id/tweets/:id' do
+delete '/tweets/:id' do
   @tweet = Tweet.find(params[:id])
   @tweet.destroy
-  redirect ':user_id/tweets'
+  redirect '/tweets'
 end
