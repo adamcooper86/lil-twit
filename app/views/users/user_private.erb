@@ -9,13 +9,13 @@
   </div>
 <% end %>
 
-<form action="/users/settings" method="post">
+<form action="/users/<%= @user.id %>" method="post">
   <input name="_method" type="hidden" value="delete">
   <input type="submit" value="Delete Account">
 </form>
 
-<form action="/user/settings">
-  <input type="text" type="hidden" value="put">
+<form action="/users/<%= @user.id %>" method="post">
+  <input name="_method" type="hidden" value="put">
   <input type="text" name="first_name" value="<%= @user.first_name %>" />
   <input type="text" name="last_name" value="<%= @user.last_name %>" />
   <input type="text" name="email" value="<%= @user.email %>" />

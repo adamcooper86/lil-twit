@@ -3,6 +3,15 @@ get '/users/new' do
   erb :'users/new'
 end
 
+get '/users/:id/timeline' do
+  @user = User.find(params[:id])
+  unless @user == current_user
+    erb :user_error
+  else
+    erb :'users/user_timeline'
+  end
+end
+
 get '/users/:id' do
   @user = User.find(params[:id])
   if @user == current_user
@@ -22,7 +31,8 @@ post '/users' do
               city: params[:city],
               state: params[:state]
               )
-  login @user
+  log_in @user
+  p @user
   redirect "/users/#{@user.id}/timeline"
 end
 
@@ -33,37 +43,33 @@ get '/users' do
 end
 
 #update
-put 'users/:id' do
+put '/users/:id' do
   @user = User.find(params[:id])
-  @user.update_attributes(username: params[:username],
-              password: params[:password],
+  p @user
+  p "#"*30
+  @user.update_attributes(
               first_name: params[:first_name],
               last_name: params[:last_name],
               email: params[:email],
               city: params[:city],
               state: params[:state]
               )
+  p @user
+  @user.save
   redirect "/users/#{params[:id]}"
 end
 
 #delete
 delete '/users/:id' do
   @user = User.find(current_user.id)
-  logout # log user out and then delete them from database
+  log_out # log user out and then delete them from database
   User.destroy(@user.id)
   redirect '/'
 end
 
 # TIMELINE
 
-get '/users/:id/timeline' do
-  @user = User.find(params[:id])
-  unless @user == current_user
-    erb :user_error
-  else
-    erb :user_timeline
-  end
-end
+
 
 
 

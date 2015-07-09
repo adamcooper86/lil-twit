@@ -9,23 +9,22 @@ end
 
 post '/tweets' do
   @tweet = Tweet.create(content: params[:content])
-  # connect to user id?
   if @tweet.persisted?
-    redirect "/:user_id/tweets"
+    redirect "/tweets/#{@tweet.id}"
   else
     status 400
-    erb :new
+    erb :'tweets/new'
   end
 end
 
-get 'tweets/:id' do
+get '/tweets/:id' do
   @tweet = Tweet.where(id: params[:id]).first
-  redirect '/tweets/#{params[:id]}'
+  erb :'tweets/show'
 end
 
-get 'tweets/:id/edit' do
+get '/tweets/:id/edit' do
     @tweet = Tweet.where(id: params[:id]).first
-    erb :edit
+    erb :'tweets/edit'
 end
 
 put '/tweets/:id' do
