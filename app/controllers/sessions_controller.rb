@@ -7,18 +7,14 @@ get '/sessions/delete' do
 end
 
 post '/sessions' do
-  if params[:username] && params[:password]
-    if @user = User.where(username: params[:username]).first
-      if @user.password == params[:password]
-        session[:user_id] = @user.id
-        redirect to "/user/#{@user.id}/timeline"
-      end
-    end
+  if log_in
+    redirect to "/user/#{@user.id}/timeline"
+  else
+    redirect to '/sessions/new'
   end
-  redirect to '/sessions/new'
 end
 
 delete '/sessions' do
-  session[:user_id] = nil
+  log_out
   redirect to '/'
 end
