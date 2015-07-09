@@ -6,16 +6,18 @@ helpers do
     end
   end
 
-  def log_in
+  def valid_log_in
     if params[:username] && params[:password]
       if user = User.where(username: params[:username]).first
         if user.password == params[:password]
-          session[:user_id] = user.id
-          true
+          user
         end
       end
     end
-    false
+  end
+
+  def log_in user
+    session[:user_id] = user.id
   end
 
   def log_out
