@@ -31,7 +31,7 @@ put '/tweets/:id' do
   @tweet = Tweet.find(params[:id])
   @tweet.update_attributes(content: params[:updated_content])
   @tweet.save
-  redirect '/tweets'
+  erb :'tweets/show'
 end
 
 delete '/tweets/:id' do
