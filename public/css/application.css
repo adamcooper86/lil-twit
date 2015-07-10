@@ -11,9 +11,11 @@ body {
 .tweet {
   background-color: #EEA800;
   opacity: .9;
-  border-radius: 4px;
-  padding: 1em;
-  margin: 15px;
+  border-radius: 10px;
+  padding: .7em;
+  padding-left: 2.5em;
+  margin: 9px;
+  color: #5B4100;
 }
 
 li.tweetContent, p.tweetContent {
@@ -23,10 +25,10 @@ li.tweetContent, p.tweetContent {
   opacity: 1;
 }
 
-span.handleIntro {
+.handleIntro {
   margin-left: 3em;
-  font-size: 0.3em;
-  color: blue;
+  font-size: .5em;
+  color: #007095;
 }
 
 .logoutButton {
