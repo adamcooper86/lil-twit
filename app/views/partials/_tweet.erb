@@ -3,8 +3,10 @@
     <% user = User.where(id: tweet.original_tweet_id).first %>
     <p>Retweeted: Original Author - <a href="/users/<%= user.id %>"><%= user.username %></a></p>
   <% end %>
+
   <p><%= tweet.user.username unless tweet.user.nil?%> : <%= tweet.created_at %></p>
   <p class="tweetContent"><%= tweet.display_content %></p>
+
   <% if current_user && tweet.user != current_user %>
   <form action="/users/<%= current_user.id %>/tweets" method="post">
     <input type="hidden" name="content" value="<%= tweet.content %>"/>
@@ -13,4 +15,13 @@
   </form>
   <% end %>
   <hr>
+
+  <% if current_user %>
+    <% if tweet.user_id == current_user.id %>
+      <form action="/tweets/<%= tweet.id %>" method="post">
+        <input type="hidden", name="_method", value="delete">
+        <input type="submit" value="Delete your shitty tweet">
+      </form>
+    <% end %>
+  <% end %>
 </div>

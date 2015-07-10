@@ -41,6 +41,7 @@ end
 
 delete '/tweets/:id' do
   @tweet = Tweet.find(params[:id])
+  @user  = User.find(@tweet.user_id)
   @tweet.destroy
-  redirect '/tweets'
+  redirect "/users/#{@user.id}/timeline"
 end
