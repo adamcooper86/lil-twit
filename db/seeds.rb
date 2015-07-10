@@ -9,7 +9,7 @@ require 'faker'
                state: Faker::Address.state
  end
 
-100.times do
+300.times do
   Tweet.create user_id: User.all.sample.id, content: Faker::Hacker.say_something_smart
 end
 
