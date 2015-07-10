@@ -1,2 +1,4 @@
 <h1><%= @hashtag.tag %> : <small><%= @hashtag.created_at %></small></h1>
+<a href="/hashtags" class="button">Back to all tags</a>
 <p><%= erb :'/partials/_tweets', locals: { tweets: @hashtag.tweets } %></p>
+
