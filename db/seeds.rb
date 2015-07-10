@@ -6,10 +6,11 @@ require 'faker'
                last_name: Faker::Name.last_name,
                email: Faker::Internet.email,
                city: Faker::Address.city,
-               state: Faker::Address.state
+               state: Faker::Address.state,
+               bio: Faker::Hacker.say_something_smart
  end
 
-100.times do
+300.times do
   Tweet.create user_id: User.all.sample.id, content: Faker::Hacker.say_something_smart
 end
 
