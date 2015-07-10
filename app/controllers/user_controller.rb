@@ -44,7 +44,8 @@ post '/users' do
                          last_name: params[:last_name],
                          email: params[:email],
                          city: params[:city],
-                         state: params[:state]
+                         state: params[:state],
+                         bio: params[:bio]
                          )
   rescue ActiveRecord::RecordInvalid => invalid
       return erb :'users/validation_error'
@@ -69,7 +70,8 @@ put '/users/:id' do
                 last_name: params[:last_name],
                 email: params[:email],
                 city: params[:city],
-                state: params[:state]
+                state: params[:state],
+                bio: params[:bio]
                 )
     @user.save
   rescue ActiveRecord::Invalid => invalid
