@@ -103,6 +103,15 @@ end
 
 # Followstuff
 
+post '/users/:id/follow' do
+  @user = User.find(params[:id])
+  p '****' * 40
+  p @user.id
+  p '****' * 40
+  current_user.follow(@user)
+  redirect "users/#{@user.id}"
+end
+
 get '/users/:id/followers' do
   @user = User.find(params[:id])
   erb :'users/user_followers'
@@ -111,12 +120,6 @@ end
 get '/users/:id/following' do
   @user = User.find(params[:id])
   erb :'users/user_following'
-end
-
-post '/users/:id/follow 'do
-  @user = User.find(params[:id])
-  current_user.follow(@user)
-  redirect "users/#{@user.id}"
 end
 
 post '/users/:id/unfollow' do
