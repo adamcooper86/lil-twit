@@ -1,0 +1,2 @@
+<h1><%= @hashtag.tag %> : <small><%= @hashtag.created_at %></small></h1>
+<p><%= erb :'/partials/_tweets', locals: { tweets: @hashtag.tweets } %></p>
