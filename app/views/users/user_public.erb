@@ -1,4 +1,15 @@
 <h2>Public</h2>
 
 <h1><%= @user.username %></h1>
-  <%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
+<%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
+
+
+<% if logged_in? && !current_user.following?(@user)%>
+  <form action="/users/<%= @user.id %>/follow" method="post">
+    <input type="submit" value="follow <%= @user.username %>">
+  </form>
+<% elsif current_user.following?(@user)%>
+  <form action="/users/<%= @user.id %>/unfollow" method="post">
+    <input type="submit" value="unfollow <%= @user.username %>">
+  </form>
+<% end %>
