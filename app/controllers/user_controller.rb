@@ -14,7 +14,12 @@ get '/users/:id/timeline' do
 end
 
 get '/users/:id' do
-  @user = User.find(params[:id])
+  begin
+    @user = User.find(params[:id])
+  rescue => e
+    redirect '/'
+  end
+
   if @user == current_user
     erb :'users/user_private'
   else
@@ -102,6 +107,16 @@ post '/users/:id/unfollow' do
   redirect "users/#{@user.id}"
 end
 
+
+#home button
+#delete all following and follower relationships when we delete a user
+#rescue user validation errors (like if someone tries to do the same e-mail or username)
+#add retweet icon toggle button, add retweet count next to button
+#make a pretty failure page if user doesn't exist
+
+#on the user page, add following count for users
+
+#show a random person to follow
 
 
 
