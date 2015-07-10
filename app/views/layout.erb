@@ -23,13 +23,32 @@
     <div class="small-1 medium-1 large-1 columns"></div>
     <div class="small-11 medium-11 large-11 columns">
 
-      <h2>Lil-Twit <small>The significantly worse way to waste your time</small>
+      <h2><a href="/">Lil-Twit</a> <small>The significantly worse way to waste your time</small>
           <% if logged_in? %>
             <span class="handleIntro"><%= "Hello, #{current_user.username}" %></span>
             <%= erb :'/partials/_log_out' %>
           <% end %>
           </h2>
 
+    <div class="row">
+      <div class="small-11 medium-11 large-11 small-center medium-center large-center columns">
+        <ul class="button-group">
+
+        <% unless logged_in? %>
+          <li><a href="/sessions/new" class="button">Login</a></li>
+          <li><a href="/users/new" class="button">Sign Up</a></li>
+        <% else %>
+          <li><a href="/users/<%= current_user.id %>" class="button">Ur Profile</a></li>
+          <li><a href="/users/<%= current_user.id %>/timeline" class="button">Ur Timeline</a></li>
+          <!-- <li><a href="/nowhere" class="button">Logout</a></li> -->
+        <% end %>
+
+          <li><a href="/tweets" class="button">View all tweets</a></li>
+          <li><a href="/users" class="button">View all users</a></li>
+          <li><a href="/nowhere" class="button">Go No Where</a></li>
+        </ul>
+      </div>
+    </div>
         <%= yield %>
     </div>
   </div>

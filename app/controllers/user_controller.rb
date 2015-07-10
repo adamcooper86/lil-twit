@@ -14,7 +14,12 @@ get '/users/:id/timeline' do
 end
 
 get '/users/:id' do
-  @user = User.find(params[:id])
+  begin
+    @user = User.find(params[:id])
+  rescue => e
+    return erb :'users/user_error'
+  end
+
   if @user == current_user
     erb :'users/user_private'
   else
@@ -24,7 +29,8 @@ end
 
 # create
 post '/users' do
-  @user = User.create(username: params[:username],
+  begin
+    @user = User.create!(username: params[:username],
               password: params[:password],
               first_name: params[:first_name],
               last_name: params[:last_name],
@@ -32,9 +38,13 @@ post '/users' do
               city: params[:city],
               state: params[:state]
               )
-  log_in @user
-  p @user
-  redirect "/users/#{@user.id}/timeline"
+    # return redirect '/' if @user.id.nil?
+  rescue ActiveRecord::RecordInvalid => invalid
+      return erb :'users/validation_error'
+  else
+    log_in @user
+    redirect "/users/#{@user.id}/timeline"
+  end
 end
 
 # read
@@ -48,15 +58,18 @@ put '/users/:id' do
   @user = User.find(params[:id])
   p @user
   p "#"*30
-  @user.update_attributes(
-              first_name: params[:first_name],
-              last_name: params[:last_name],
-              email: params[:email],
-              city: params[:city],
-              state: params[:state]
-              )
-  p @user
-  @user.save
+  begin
+    @user.update_attributes(
+                first_name: params[:first_name],
+                last_name: params[:last_name],
+                email: params[:email],
+                city: params[:city],
+                state: params[:state]
+                )
+    @user.save
+  rescue ActiveRecord::Invalid => invalid
+    redirect "/users/#{params[:id]}"
+  end
   redirect "/users/#{params[:id]}"
 end
 
@@ -102,6 +115,10 @@ post '/users/:id/unfollow' do
   redirect "users/#{@user.id}"
 end
 
+#add retweet icon toggle button, add retweet count next to button
+# add a catch all page
+
+#show a random person to follow
 
 
 
