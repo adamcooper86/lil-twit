@@ -3,6 +3,12 @@ get '/users/new' do
   erb :'users/new'
 end
 
+post '/users/search' do
+  @user_found = User.find_by(username: params[:user])
+  # p @user_found
+  redirect "/users/#{@user_found.id}"
+end
+
 get '/users/:id/timeline' do
   @user = User.find(params[:id])
   # @tweets = @user.tweets.reverse_order
@@ -103,7 +109,7 @@ get '/users/:id/following' do
   erb :'users/user_following'
 end
 
-post '/users/:id/follow' do
+post '/users/:id/follow 'do
   @user = User.find(params[:id])
   current_user.follow(@user)
   redirect "users/#{@user.id}"
