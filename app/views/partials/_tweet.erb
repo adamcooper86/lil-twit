@@ -4,23 +4,24 @@
     <p>Retweeted: Original Author - <a href="/users/<%= user.id %>"><%= user.username %></a></p>
   <% end %>
 
-  <p><%= tweet.user.username unless tweet.user.nil?%> : <%= tweet.created_at %></p>
+  <p><a href="/users/<%= @user.id %>"><%= tweet.user.username unless tweet.user.nil?%></a> : <%= tweet.created_at %></p>
   <p class="tweetContent"><%= tweet.display_content %></p>
 
   <% if current_user && tweet.user != current_user %>
   <form action="/users/<%= current_user.id %>/tweets" method="post">
     <input type="hidden" name="content" value="<%= tweet.content %>"/>
     <input type="hidden" name="original_tweet_id" value="<%= tweet.id %>" />
-    <input type="submit" value="Retweet"/>
+    <input type="submit" value="Retweet" class="button"/>
   </form>
   <% end %>
-  <hr>
+
 
   <% if current_user %>
     <% if tweet.user_id == current_user.id %>
+      </hr>
       <form action="/tweets/<%= tweet.id %>" method="post">
         <input type="hidden", name="_method", value="delete">
-        <input type="submit" value="Delete your shitty tweet">
+        <input type="submit" value="Delete your shitty tweet" class="button">
       </form>
     <% end %>
   <% end %>

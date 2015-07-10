@@ -1,10 +1,8 @@
-<h2>Private</h2>
-
-<h1><%= @user.username %></h1>
+<h2 class="user_name"><%= @user.username %></h2>
 <h3>Bio:</h3>
 <p><%= @user.bio %></p>
 
-<h2>Your Tweets:</h2>
+<h3 class="user_name">Your Tweets:</h3>
 <%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
 
 <%= erb :'partials/_followship', locals: { user: @user.id } %>
@@ -12,16 +10,16 @@
 <hr>
 <form action="/users/<%= @user.id %>" method="post">
   <input name="_method" type="hidden" value="delete">
-  <input type="submit" value="Delete Account">
+  <input type="submit" value="Delete Account" class="button">
 </form>
 
-<h2>Want to change your name? Your Life? Your Livelihood? Do so Here.</h2>
-<form action="/users/<%= @user.id %>" method="post">
+<h4 style="margin: 5, auto">Want to change your information?</h2>
+<form action="/users/<%= @user.id %>" method="post" style="display:inline-block">
   <input name="_method" type="hidden" value="put">
   <input type="text" name="first_name" placeholder="First Name" value="<%= @user.first_name %>"  required/>
   <input type="text" name="last_name" placeholder="Last Name" value="<%= @user.last_name %>" required />
   <input type="text" name="email" placeholder="Email" value="<%= @user.email %>" required />
   <input type="text" name="city" placeholder="City" value="<%= @user.city %>" required />
   <input type="text" name="state" placeholder="State" value="<%= @user.state %>" required />
-  <input type="submit" value="submit" />
+  <input type="submit" value="submit" class="button"/>
 </form>
