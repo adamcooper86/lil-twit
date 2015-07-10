@@ -1,6 +1,8 @@
 <h2>Public</h2>
 
 <h1><%= @user.username %></h1>
+<h3>Bio:</h3>
+<p><%= @user.bio %></p>
 <%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
 
 <%= erb :'partials/_followship', locals: { user: @user.id } %>
