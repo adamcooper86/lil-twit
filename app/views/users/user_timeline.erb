@@ -1,12 +1,11 @@
 <h1>This is your god damn user timeline, <%= @user.username %>!</h1>
 
 <p>Make a new tweet!</p>
-<form action="/users/<%= @user.id %>/tweets/new" method="POST">
-    <input type="text" name="content" />
-    <input type="submit" value="Tweet!" />
-</form>
+<%= erb :'/partials/_new_tweet', locals: { user_id: @user.id } %>
+
 <a href="/users/<%= @user.id %>">Go to your private profile page</a>
 
+<!-- TODO: add followers -->
 <ul>
 <% @tweets.each do |tweet| %>
   <div class="tweet">

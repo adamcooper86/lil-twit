@@ -5,7 +5,7 @@ end
 
 get '/users/:id/timeline' do
   @user = User.find(params[:id])
-  @tweets = @user.tweets
+  @tweets = @user.tweets.reverse_order
   unless @user == current_user
     erb :user_error
   else

@@ -3,13 +3,7 @@
 <h1><%= @user.username %></h1>
 
 <h2>Your Tweets:</h2>
-<% @user.tweets.each do |tweet| %>
-  <div class="tweet">
-    <p><%= tweet.user.username %> : <%= tweet.created_at %></p>
-    <p class="tweetContent"><%= tweet.content %></p>
-    <hr>
-  </div>
-<% end %>
+  <%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
 
 <hr>
 <form action="/users/<%= @user.id %>" method="post">

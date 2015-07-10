@@ -1,0 +1,7 @@
+<% tweets.each do |tweet| %>
+  <div class="tweet">
+    <p><%= tweet.user.username %> : <%= tweet.created_at %></p>
+    <p class="tweetContent"><%= tweet.content %></p>
+    <hr>
+  </div>
+<% end %>
