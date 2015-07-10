@@ -11,7 +11,8 @@
 <% @tweets.each do |tweet| %>
   <div class="tweet">
     <li><%= tweet.user.username %> : <%= tweet.created_at %></li>
-    <li><%= tweet.content %></li>
+    <li class="tweetContent"><%= tweet.content %></li>
+    <hr>
   </div>
 <% end %>
 </ul>
