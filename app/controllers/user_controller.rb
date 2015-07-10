@@ -115,11 +115,8 @@ post '/users/:id/unfollow' do
   redirect "users/#{@user.id}"
 end
 
-#delete all following and follower relationships when we delete a user
 #add retweet icon toggle button, add retweet count next to button
-#make a pretty failure page if user doesn't exist
-
-#on the user page, add following count for users
+# add a catch all page
 
 #show a random person to follow
 
