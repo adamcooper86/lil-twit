@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :city
       t.string :state
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
