@@ -1,5 +1,4 @@
-<p>Edit A tweet!</p>
-
+<%= erb :'/partials/_tweet', locals: { tweet: @tweet } %>
 <form action="/tweets" method="POST">
     <input type="hidden" name="method" value="put" />
     <input type="text" name="content" value="<%= @tweet.content%>"/>
