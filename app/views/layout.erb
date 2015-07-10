@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.css"></script>
   <script src="/foundation/js/vendor/modernizr.js"></script>
   <script src="/js/application.js"></script>
-  <title>Lil-Twit</title>
+  <title>Shitr</title>
 </head>
 <header>
   <div class="buttons">
@@ -23,7 +23,7 @@
     <div class="small-1 medium-1 large-1 columns"></div>
     <div class="small-11 medium-11 large-11 columns">
 
-      <h2><a href="/">Lil-Twit</a> <small>The significantly worse way to waste your time</small>
+      <h2><a href="/">Shitr</a> <small>The significantly worse way to waste your time</small>
           <% if logged_in? %>
             <span class="handleIntro"><%= "Hello, #{current_user.username}" %></span>
             <%= erb :'/partials/_log_out' %>
@@ -45,7 +45,7 @@
 
           <li><a href="/tweets" class="button">View all tweets</a></li>
           <li><a href="/users" class="button">View all users</a></li>
-          <li><a href="/nowhere" class="button">Go No Where</a></li>
+          <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="button">Go No Where</a></li>
           <li> <%= erb :'/partials/_user_search' %> </li>
         </ul>
       </div>
@@ -57,7 +57,7 @@
     <div class="small-1 medium-1 large-1 columns"></div>
     <div class="small-11 medium-11 large-11 columns">
       <footer>
-        <p>Copyright Lil-Twit 2015</p>
+        <p style="position: relative; bottom: 0;">Copyright Lil-Twit 2015</p>
       </footer>
     </div>
   </div>
