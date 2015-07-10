@@ -29,6 +29,13 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+  def grab_following_tweets
+    tweets = []
+    self.following.each {|followee| tweets << followee.tweets}
+    self.tweets.each {|tweet| tweets << tweet}
+    tweets.flatten.sort_by(&:created_at).reverse
+  end
+
   include BCrypt
 
   def password

@@ -5,7 +5,7 @@ end
 
 get '/users/:id/timeline' do
   @user = User.find(params[:id])
-  @tweets = @user.tweets.reverse_order
+  # @tweets = @user.tweets.reverse_order
   unless @user == current_user
     erb :user_error
   else
@@ -78,6 +78,19 @@ post '/users/:id/tweets' do
 end
 
 # TIMELINE
+
+post '/users/:id/follow' do
+  @user = User.find(params[:id])
+  current_user.follow(@user)
+  redirect "users/#{@user.id}"
+end
+
+post '/users/:id/unfollow' do
+  @user = User.find(params[:id])
+  current_user.unfollow(@user)
+  redirect "users/#{@user.id}"
+end
+
 
 
 
