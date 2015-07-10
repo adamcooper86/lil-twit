@@ -5,8 +5,7 @@ class CreateTweets < ActiveRecord::Migration
       t.integer :original_tweet_id
       t.string  :content, limit: 140
 
-
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
