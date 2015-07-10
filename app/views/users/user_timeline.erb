@@ -9,11 +9,7 @@
 
 <ul>
 <% @user.grab_following_tweets.each do |tweet| %>
-  <div class="tweet">
-    <li><%= tweet.user.username %> : <%= tweet.created_at %></li>
-    <li class="tweetContent"><%= tweet.content %></li>
-    <hr>
-  </div>
+  <%= erb :'/partials/_tweet', locals: { tweet: tweet } %>
 <% end %>
 </ul>
 
