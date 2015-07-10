@@ -1,0 +1,15 @@
+<div class="tweet">
+  <% if tweet.original_tweet_id %>
+    <p>Retweeted</p>
+  <% end %>
+  <p><%= tweet.user.username %> : <%= tweet.created_at %></p>
+  <p class="tweetContent"><%= tweet.content %></p>
+  <% if current_user %>
+  <form action="/users/<%= current_user.id %>/tweets" method="post">
+    <input type="hidden" name="content" value="<%= tweet.content %>"/>
+    <input type="hidden" name="original_tweet_id" value="<%= tweet.id %>" />
+    <input type="submit" value="Retweet"/>
+  </form>
+  <% end %>
+  <hr>
+</div>

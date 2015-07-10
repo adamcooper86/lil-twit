@@ -60,6 +60,10 @@ put '/users/:id' do
   redirect "/users/#{params[:id]}"
 end
 
+get '/users/:id/tweets' do
+  redirect to "/users/#{params[:id]}"
+end
+
 #delete
 delete '/users/:id' do
   @user = User.find(current_user.id)
@@ -68,8 +72,8 @@ delete '/users/:id' do
   redirect '/'
 end
 
-post '/users/:id/tweets/new' do
-  Tweet.create(user_id: params[:id], content: params[:content])
+post '/users/:id/tweets' do
+  Tweet.create(user_id: params[:id], content: params[:content], original_tweet_id: params[:original_tweet_id])
   redirect "/users/#{params[:id]}/timeline"
 end
 
