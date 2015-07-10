@@ -1,5 +1,5 @@
 get '/tweets' do
-  @tweets = Tweet.all.reverse_order.first(50)
+  @tweets = Tweet.all.reverse_order
   erb :'tweets/index'
 end
 
