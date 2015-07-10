@@ -1,3 +1,17 @@
 <h1>This is your god damn user timeline, <%= @user.username %>!</h1>
 
+<p>Make a new tweet!</p>
+<%= erb :'/partials/_new_tweet', locals: { user_id: @user.id } %>
+
 <a href="/users/<%= @user.id %>">Go to your private profile page</a>
+
+<!-- TODO: add followers -->
+<ul>
+<% @tweets.each do |tweet| %>
+  <div class="tweet">
+    <li><%= tweet.user.username %> : <%= tweet.created_at %></li>
+    <li class="tweetContent"><%= tweet.content %></li>
+    <hr>
+  </div>
+<% end %>
+</ul>

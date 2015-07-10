@@ -5,6 +5,7 @@ end
 
 get '/users/:id/timeline' do
   @user = User.find(params[:id])
+  @tweets = @user.tweets.reverse_order
   unless @user == current_user
     erb :user_error
   else
@@ -65,6 +66,11 @@ delete '/users/:id' do
   log_out # log user out and then delete them from database
   User.destroy(@user.id)
   redirect '/'
+end
+
+post '/users/:id/tweets/new' do
+  Tweet.create(user_id: params[:id], content: params[:content])
+  redirect "/users/#{params[:id]}/timeline"
 end
 
 # TIMELINE
