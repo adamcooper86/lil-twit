@@ -30,7 +30,7 @@ end
 # create
 post '/users' do
   begin
-    @user = User.create(username: params[:username],
+    @user = User.create!(username: params[:username],
               password: params[:password],
               first_name: params[:first_name],
               last_name: params[:last_name],
@@ -38,9 +38,9 @@ post '/users' do
               city: params[:city],
               state: params[:state]
               )
+    # return redirect '/' if @user.id.nil?
   rescue ActiveRecord::RecordInvalid => invalid
-    p 'ERROR'
-    return redirect '/'
+      return erb :'users/validation_error'
   else
     log_in @user
     redirect "/users/#{@user.id}/timeline"
@@ -115,7 +115,6 @@ post '/users/:id/unfollow' do
   redirect "users/#{@user.id}"
 end
 
-#rescue user validation errors (like if someone tries to do the same e-mail or username)
 #delete all following and follower relationships when we delete a user
 #add retweet icon toggle button, add retweet count next to button
 #make a pretty failure page if user doesn't exist
