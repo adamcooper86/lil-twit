@@ -24,7 +24,12 @@ end
 
 get '/tweets/:id/edit' do
     @tweet = Tweet.where(id: params[:id]).first
-    erb :'tweets/edit'
+    @user = current_user
+    if @tweet.user_id == @user.id
+      erb :'tweets/edit'
+    else
+      redirect to "/tweets/#{@tweet.id}"
+    end
 end
 
 put '/tweets/:id' do
