@@ -17,7 +17,7 @@ class Tweet < ActiveRecord::Base
     string.match(tag_expression)
     string.gsub!(tag_expression){|match_tag|
       tag = Hashtag.find_by tag: match_tag
-      "<a href='/tags/#{tag.id}'>#{match_tag}</a>"
+      "<a href='/hashtags/#{tag.id}'>#{match_tag}</a>"
     }
     self.content
   end
