@@ -78,7 +78,17 @@ post '/users/:id/tweets' do
   redirect "/users/#{params[:id]}/timeline"
 end
 
-# TIMELINE
+# Followstuff
+
+get '/users/:id/followers' do
+  @user = User.find(params[:id])
+  erb :'users/user_followers'
+end
+
+get '/users/:id/following' do
+  @user = User.find(params[:id])
+  erb :'users/user_following'
+end
 
 post '/users/:id/follow' do
   @user = User.find(params[:id])
