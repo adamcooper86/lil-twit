@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     tweets.flatten.sort_by(&:created_at).reverse
   end
 
+  def delete_tweets
+    Tweet.destroy_all(user_id: self.id)
+  end
+
   include BCrypt
 
   def password

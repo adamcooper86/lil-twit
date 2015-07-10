@@ -68,6 +68,7 @@ end
 delete '/users/:id' do
   @user = User.find(current_user.id)
   log_out # log user out and then delete them from database
+  @user.delete_tweets
   User.destroy(@user.id)
   redirect '/'
 end
