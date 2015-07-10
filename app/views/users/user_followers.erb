@@ -1,0 +1,3 @@
+<div class="followers"><% @user.followers.each do |follower| %>
+  <p><a href="/users/<%= follower.id %>"><%= follower.username %></a></p>
+  <% end %></div>

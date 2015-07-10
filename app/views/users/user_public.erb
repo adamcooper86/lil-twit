@@ -3,6 +3,9 @@
 <h1><%= @user.username %></h1>
 <%= erb :'/partials/_tweets', locals: { tweets: @user.tweets } %>
 
+<a href="/users/<%= @user.id %>/following">Following: <%= @user.following.count %></a>
+
+<a href="/users/<%= @user.id %>/followers">Followers: <%= @user.followers.count %></a>
 
 <% if logged_in? && !current_user.following?(@user)%>
   <form action="/users/<%= @user.id %>/follow" method="post">
