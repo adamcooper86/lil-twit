@@ -1,3 +1,17 @@
 <h1>This is your god damn user timeline, <%= @user.username %>!</h1>
 
+<p>Make a new tweet!</p>
+<form action="/users/<%= @user.id %>/tweets/new" method="POST">
+    <input type="text" name="content" />
+    <input type="submit" value="Tweet!" />
+</form>
 <a href="/users/<%= @user.id %>">Go to your private profile page</a>
+
+<ul>
+<% @tweets.each do |tweet| %>
+  <div class="tweet">
+    <li><%= tweet.user.username %> : <%= tweet.created_at %></li>
+    <li><%= tweet.content %></li>
+  </div>
+<% end %>
+</ul>
