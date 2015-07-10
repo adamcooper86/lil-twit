@@ -5,13 +5,15 @@ end
 
 post '/users/search' do
   @user_found = User.find_by(username: params[:user])
-  # p @user_found
-  redirect "/users/#{@user_found.id}"
+  unless @user_found.nil?
+    redirect "/users/#{@user_found.id}"
+  else
+    erb :'users/user_error'
+  end
 end
 
 get '/users/:id/timeline' do
   @user = User.find(params[:id])
-  # @tweets = @user.tweets.reverse_order
   unless @user == current_user
     erb :user_error
   else
@@ -37,14 +39,13 @@ end
 post '/users' do
   begin
     @user = User.create!(username: params[:username],
-              password: params[:password],
-              first_name: params[:first_name],
-              last_name: params[:last_name],
-              email: params[:email],
-              city: params[:city],
-              state: params[:state]
-              )
-    # return redirect '/' if @user.id.nil?
+                         password: params[:password],
+                         first_name: params[:first_name],
+                         last_name: params[:last_name],
+                         email: params[:email],
+                         city: params[:city],
+                         state: params[:state]
+                         )
   rescue ActiveRecord::RecordInvalid => invalid
       return erb :'users/validation_error'
   else
@@ -62,8 +63,6 @@ end
 #update
 put '/users/:id' do
   @user = User.find(params[:id])
-  p @user
-  p "#"*30
   begin
     @user.update_attributes(
                 first_name: params[:first_name],
@@ -76,7 +75,7 @@ put '/users/:id' do
   rescue ActiveRecord::Invalid => invalid
     redirect "/users/#{params[:id]}"
   end
-  redirect "/users/#{params[:id]}"
+    redirect "/users/#{params[:id]}"
 end
 
 get '/users/:id/tweets' do
@@ -93,7 +92,10 @@ delete '/users/:id' do
 end
 
 post '/users/:id/tweets' do
-  Tweet.create(user_id: params[:id], content: params[:content], original_tweet_id: params[:original_tweet_id])
+  Tweet.create(user_id: params[:id],
+               content: params[:content],
+               original_tweet_id: params[:original_tweet_id]
+               )
   redirect "/users/#{params[:id]}/timeline"
 end
 
@@ -120,11 +122,6 @@ post '/users/:id/unfollow' do
   current_user.unfollow(@user)
   redirect "users/#{@user.id}"
 end
-
-#add retweet icon toggle button, add retweet count next to button
-# add a catch all page
-
-#show a random person to follow
 
 
 
